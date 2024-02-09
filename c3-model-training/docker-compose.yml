@@ -1,0 +1,18 @@
+version: "3.8"
+networks:
+    default:
+        name: vgg16-training-network
+        external: true
+services:
+    vgg16-train-cli:
+        image: vgg16-train-cli
+        container_name: vgg16-train-cli
+        volumes:
+            - ../secrets:/secrets
+            - ../vgg16_training:/app
+        environment:
+            GOOGLE_APPLICATION_CREDENTIALS: /secrets/data-service-account.json
+            GCP_PROJECT: "AC215_rehab_image_detection_ai"
+            GCP_ZONE: "us-central1-a"
+            GCS_BUCKET_NAME: "listing-data"
+
