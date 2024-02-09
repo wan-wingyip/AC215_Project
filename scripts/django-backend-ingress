@@ -1,0 +1,46 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  creationTimestamp: "2023-12-12T12:36:58Z"
+  finalizers:
+  - networking.gke.io/ingress-finalizer-V2
+  generation: 1
+  managedFields:
+  - apiVersion: networking.k8s.io/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:spec:
+        f:defaultBackend:
+          .: {}
+          f:service:
+            .: {}
+            f:name: {}
+            f:port:
+              .: {}
+              f:number: {}
+    manager: GoogleCloudConsole
+    operation: Update
+    time: "2023-12-12T12:36:58Z"
+  - apiVersion: networking.k8s.io/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:finalizers:
+          .: {}
+          v:"networking.gke.io/ingress-finalizer-V2": {}
+    manager: glbc
+    operation: Update
+    subresource: status
+    time: "2023-12-12T12:36:58Z"
+  name: django-backend-ingress
+  namespace: default
+  resourceVersion: "193572"
+  uid: 13c06514-4d94-45dd-9e34-5a10e40a25b9
+spec:
+  defaultBackend:
+    service:
+      name: django-backend-service
+      port:
+        number: 8000
+status:
+  loadBalancer: {}

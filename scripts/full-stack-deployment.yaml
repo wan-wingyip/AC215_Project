@@ -1,0 +1,94 @@
+# K8S Deployment YAML for Full Stack Application, executed via Github Actions
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: full-stack-config-map
+data:
+  # Frontend env and secrets, loaded from CICD pipeline at Deployment
+  NEXT_PUBLIC_RAPID_API_KEY: 'GA_NEXT_PUBLIC_RAPID_API_KEY'
+  NEXT_PUBLIC_INFERENCE_URL: 'GA_GKE_C4_DJANGO_CLUSTER_IP'
+  NEXT_PUBLIC_REALTY_API_URL: 'GA_NEXT_PUBLIC_REALTY_API_URL'
+  # Django env and secrets, loaded from CICD pipeline at Deployment
+  WANDB_API_KEY: 'GA_WANDB_API_KEY'
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-backend-auto-cicd
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: django-backend-auto-cicd
+  template:
+    metadata:
+      labels:
+        app: django-backend-auto-cicd
+    spec:
+      containers:
+      - name: c4-django-model-inference
+        image: ARTIFACT_REGISTRY_PATH/GCP_PROJECT/ARTIFACT_REGISTRY_REPO_NAME/c4-model-inference:latest
+        ports:
+        - containerPort: 8000
+        envFrom:
+                - configMapRef:
+                    name: full-stack-config-map
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: django-backend-auto-cicd
+spec:
+  clusterIP: 'GA_GKE_C4_DJANGO_CLUSTER_IP' # presetting an internal port number
+  selector:
+    app: django-backend-auto-cicd
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+  type: ClusterIP
+
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-frontend-auto-cicd
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: react-frontend-auto-cicd
+  template:
+    metadata:
+      labels:
+        app: react-frontend-auto-cicd
+    spec:
+      containers:
+      - name: c5-react-webapp
+        image: ARTIFACT_REGISTRY_PATH/GCP_PROJECT/ARTIFACT_REGISTRY_REPO_NAME/c5b-front-end:latest
+        ports:
+        - containerPort: 3000 # docker container's port
+        envFrom:
+        - configMapRef:
+            name: full-stack-config-map
+
+---
+
+apiVersion: v1
+kind: Service # server = static ip address
+metadata:
+  name: react-frontend-auto-cicd
+spec:
+  type: LoadBalancer
+  selector:
+    app: react-frontend-auto-cicd
+  ports:
+    - protocol: TCP
+      port: 80          # port to be exposed
+      targetPort: 3000  # should be same as docker container's port

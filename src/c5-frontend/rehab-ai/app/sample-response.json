@@ -1,0 +1,305 @@
+[
+    {
+        "__typename": "SearchHome",
+        "property_id": "2003350199",
+        "listing_id": "2962286540",
+        "plan_id": null,
+        "status": "for_sale",
+        "photo_count": 35,
+        "branding": [
+            {
+                "__typename": "Branding",
+                "photo": null,
+                "name": "Sereno",
+                "phone": null,
+                "link": null
+            }
+        ],
+        "location": {
+            "__typename": "SearchHomeLocation",
+            "address": {
+                "__typename": "SearchHomeAddress",
+                "city": "San Jose",
+                "line": "1767 Parkview Green Cir",
+                "street_name": "Parkview Green",
+                "street_number": "1767",
+                "street_suffix": "Cir",
+                "country": "USA",
+                "postal_code": "95131",
+                "state_code": "CA",
+                "state": "California",
+                "coordinate": {
+                    "__typename": "Coordinate",
+                    "lat": 37.379001,
+                    "lon": -121.882542,
+                    "accuracy": null
+                }
+            },
+            "street_view_url": "https://maps.googleapis.com/maps/api/streetview?channel=rdc-streetview&client=gme-movesalesinc&location=1767%20Parkview%20Green%20Cir%2C%20San%20Jose%2C%20CA%2095131&size=640x480&source=outdoor&signature=T1zs-S4GJgMb_XEA5nZSW1wFrSA=",
+            "county": {
+                "__typename": "HomeCounty",
+                "fips_code": "06085"
+            }
+        },
+        "open_houses": [
+            {
+                "__typename": "HomeOpenHouse",
+                "start_date": "2023-12-10T21:00:00Z",
+                "end_date": "2023-12-11T00:00:00Z",
+                "description": null,
+                "time_zone": "PST"
+            }
+        ],
+        "description": {
+            "__typename": "SearchHomeDescription",
+            "sub_type": "condo",
+            "type": "condos",
+            "beds": 2,
+            "baths": 2,
+            "lot_sqft": 1751,
+            "sqft": 1228,
+            "beds_max": null,
+            "beds_min": null,
+            "sqft_max": null,
+            "sqft_min": null,
+            "baths_full": 2,
+            "baths_half": null,
+            "baths_min": null,
+            "baths_max": null,
+            "baths_full_calc": 2,
+            "baths_partial_calc": null
+        },
+        "virtual_tours": [
+            {
+                "__typename": "VirtualTour",
+                "href": "Https://www.1767ParkviewGreen.com"
+            }
+        ],
+        "matterport": false,
+        "advertisers": [
+            {
+                "__typename": "HomeAdvertiser",
+                "fulfillment_id": "552807",
+                "name": "Rachel Pong",
+                "email": "rachel.pong@cbnorcal.com",
+                "href": "http://www.rachelpong.com/",
+                "slogan": null,
+                "type": "seller"
+            }
+        ],
+        "flags": {
+            "__typename": "HomeFlags",
+            "is_price_reduced": null,
+            "is_new_construction": null,
+            "is_foreclosure": null,
+            "is_plan": null,
+            "is_new_listing": true,
+            "is_coming_soon": null,
+            "is_contingent": null,
+            "is_pending": null
+        },
+        "source": {
+            "__typename": "MlsSource",
+            "agents": [
+                {
+                    "__typename": "MlsAgent",
+                    "id": "SJCA",
+                    "agent_id": "01387310",
+                    "agent_name": "Rachel Pong",
+                    "office_id": "27559",
+                    "office_name": null
+                }
+            ],
+            "id": "SJCA",
+            "type": "mls",
+            "spec_id": null,
+            "plan_id": null,
+            "listing_href": null,
+            "listing_id": "ML81949275"
+        },
+        "pet_policy": null,
+        "community": null,
+        "primary_photo": {
+            "__typename": "Photo",
+            "href": "https://ap.rdcpix.com/1d9ab0fe646b21b1d5805670599262afl-m2273294749s.jpg"
+        },
+        "href": "https://www.realtor.com/realestateandhomes-detail/1767-Parkview-Green-Cir_San-Jose_CA_95131_M20033-50199",
+        "list_price": 838000,
+        "list_price_min": null,
+        "list_price_max": null,
+        "price_reduced_amount": null,
+        "estimate": {
+            "__typename": "LatestEstimate",
+            "estimate": 842000
+        },
+        "lead_attributes": {
+            "__typename": "LeadAttributes",
+            "lead_type": "co_broke",
+            "show_contact_an_agent": true,
+            "opcity_lead_attributes": {
+                "__typename": "OpCityLeadAttributes",
+                "flip_the_market_enabled": false
+            }
+        },
+        "last_sold_date": "2013-08-27",
+        "list_date": "2023-12-06T23:50:53.000000Z",
+        "products": {
+            "__typename": "ProductSummary",
+            "brand_name": "essentials",
+            "products": [
+                "core.agent",
+                "core.broker",
+                "co_broke"
+            ]
+        },
+        "last_sold_price": 503000
+    },
+    {
+        "__typename": "SearchHome",
+        "property_id": "1910257949",
+        "listing_id": "2962271238",
+        "plan_id": null,
+        "status": "for_sale",
+        "photo_count": 57,
+        "branding": [
+            {
+                "__typename": "Branding",
+                "photo": null,
+                "name": "24K Real Estate Services",
+                "phone": null,
+                "link": null
+            }
+        ],
+        "location": {
+            "__typename": "SearchHomeLocation",
+            "address": {
+                "__typename": "SearchHomeAddress",
+                "city": "San Jose",
+                "line": "1751 Avenida Elisa",
+                "street_name": "Avenida Elisa",
+                "street_number": "1751",
+                "street_suffix": null,
+                "country": "USA",
+                "postal_code": "95131",
+                "state_code": "CA",
+                "state": "California",
+                "coordinate": {
+                    "__typename": "Coordinate",
+                    "lat": 37.389602,
+                    "lon": -121.891444,
+                    "accuracy": null
+                }
+            },
+            "street_view_url": "https://maps.googleapis.com/maps/api/streetview?channel=rdc-streetview&client=gme-movesalesinc&location=1751%20Avenida%20Elisa%2C%20San%20Jose%2C%20CA%2095131&size=640x480&source=outdoor&signature=L_nVn-jo1aiwh1Yr6I3RAKVxIvY=",
+            "county": {
+                "__typename": "HomeCounty",
+                "fips_code": "06085"
+            }
+        },
+        "open_houses": [
+            {
+                "__typename": "HomeOpenHouse",
+                "start_date": "2023-12-10T21:30:00Z",
+                "end_date": "2023-12-11T00:30:00Z",
+                "description": null,
+                "time_zone": "PST"
+            }
+        ],
+        "description": {
+            "__typename": "SearchHomeDescription",
+            "sub_type": "condo",
+            "type": "condos",
+            "beds": 4,
+            "baths": 4,
+            "lot_sqft": 2035,
+            "sqft": 2035,
+            "beds_max": null,
+            "beds_min": null,
+            "sqft_max": null,
+            "sqft_min": null,
+            "baths_full": 3,
+            "baths_half": 1,
+            "baths_min": null,
+            "baths_max": null,
+            "baths_full_calc": 3,
+            "baths_partial_calc": 1
+        },
+        "virtual_tours": null,
+        "matterport": false,
+        "advertisers": [
+            {
+                "__typename": "HomeAdvertiser",
+                "fulfillment_id": "0",
+                "name": "Suzane Quimson",
+                "email": "suzanequimson@yahoo.com",
+                "href": null,
+                "slogan": null,
+                "type": "seller"
+            }
+        ],
+        "flags": {
+            "__typename": "HomeFlags",
+            "is_price_reduced": null,
+            "is_new_construction": null,
+            "is_foreclosure": null,
+            "is_plan": null,
+            "is_new_listing": true,
+            "is_coming_soon": null,
+            "is_contingent": null,
+            "is_pending": null
+        },
+        "source": {
+            "__typename": "MlsSource",
+            "agents": [
+                {
+                    "__typename": "MlsAgent",
+                    "id": "SJCA",
+                    "agent_id": "01327591",
+                    "agent_name": "Suzane Quimson",
+                    "office_id": "5010093",
+                    "office_name": "24K Real Estate Services"
+                }
+            ],
+            "id": "SJCA",
+            "type": "mls",
+            "spec_id": null,
+            "plan_id": null,
+            "listing_href": null,
+            "listing_id": "ML81949231"
+        },
+        "pet_policy": null,
+        "community": null,
+        "primary_photo": {
+            "__typename": "Photo",
+            "href": "https://ap.rdcpix.com/2cb0a451c910f5264ce6787afc2ead1el-m2718940953s.jpg"
+        },
+        "href": "https://www.realtor.com/realestateandhomes-detail/1751-Avenida-Elisa_San-Jose_CA_95131_M19102-57949",
+        "list_price": 1349000,
+        "list_price_min": null,
+        "list_price_max": null,
+        "price_reduced_amount": null,
+        "estimate": {
+            "__typename": "LatestEstimate",
+            "estimate": 1377500
+        },
+        "lead_attributes": {
+            "__typename": "LeadAttributes",
+            "lead_type": "co_broke",
+            "show_contact_an_agent": true,
+            "opcity_lead_attributes": {
+                "__typename": "OpCityLeadAttributes",
+                "flip_the_market_enabled": false
+            }
+        },
+        "last_sold_date": "2007-04-27",
+        "list_date": "2023-12-06T18:16:28.000000Z",
+        "products": {
+            "__typename": "ProductSummary",
+            "brand_name": "basic_opt_in",
+            "products": [
+                "co_broke"
+            ]
+        },
+        "last_sold_price": 765500
+    }
+]

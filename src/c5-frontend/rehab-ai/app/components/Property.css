@@ -1,0 +1,153 @@
+/* Property.css */
+
+.property-link {
+    text-decoration: none;
+}
+
+
+
+
+.property-container {
+    position: relative;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 400px; /* Adjust as necessary */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.overlay-label {
+    position: absolute;
+    bottom: 30%;
+    right: 0%;
+    background-color: rgba(255, 0, 0, 0.8); /* Red background with opacity */
+    color: white;
+    padding: 5px 10px 5px 10px;
+    z-index: 0; /* Make sure it's above the property image */
+    font-size: 20px;
+    border-radius: 1px;
+}
+
+.property-image {
+    width: 400px;
+    height: 260px;
+    display: block;
+    border-radius: 8px 8px 0 0;
+}
+
+.text-container {
+    padding: 8px;
+}
+
+.property-price-container {
+    padding-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.property-price {
+    display: flex;
+    align-items: center;
+}
+
+.property-verified-icon {
+    padding-right: 3px;
+    color: green;
+}
+
+.property-price-text {
+    font-weight: bold;
+    font: "open sans", "adjusted ariel";
+    color: black;
+    font-size: 20px;
+}
+
+.property-details {
+    display: flex;
+    align-items: center;
+    padding: 3px 1px 3px 1px;
+    justify-content: space-between;
+    width: 250px;
+    font-size: 14px;
+    color: #2a2a33;
+}
+
+.property-detail-item {
+    display: flex;
+    align-items: center;
+}
+
+.property-detail-text {
+    margin-left: 2px;
+}
+
+.property-address {
+    display: flex;
+    align-items: center;
+    padding: 3px 1px 3px 1px;
+    justify-content: space-between;
+    width: 250px;
+    font-size: 14px;
+    color: #2a2a33;
+}
+
+
+
+/*---------------------------------------------*/
+
+
+.card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 250px; /* Adjust as necessary */
+    margin: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.card-content {
+    padding: 15px;
+    background-color: #fff;
+}
+
+.card-title {
+    font-size: 1.2em;
+    margin-bottom: .5em;
+}
+
+.card-text {
+    font-size: .9em;
+    color: #555;
+}
+
+.card-footer {
+    padding: 10px;
+    background-color: #f8f8f8;
+    border-top: 1px solid #eee;
+    text-align: center;
+}
+
+.price {
+    color: #e84118;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.details {
+    font-size: .8em;
+    color: #333;
+}
+
+.heart-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+  

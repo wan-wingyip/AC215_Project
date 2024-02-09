@@ -1,0 +1,33 @@
+/* Banner styling */
+.bannerContainer {
+    position: relative;
+    background-image: url('https://www.zillowstatic.com/bedrock/app/uploads/sites/37/CHTR-Banner1-4f2be4.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Overlay content */
+.overlayContent {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white; /* Text color */
+    text-align: center;
+    z-index: 2; /* Ensure it's above the background image */
+}
+
+/* Overlay content tile */
+.overlayContent h1{
+    color: white; /* Text color */
+    font-size: xx-large;
+    font-size: 36px;
+}
+
+/* Overlay content subtitle*/
+.overlayContent h3{
+    color: lightgrey; /* Text color */
+    font-size: large;
+}

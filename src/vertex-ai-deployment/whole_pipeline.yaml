@@ -1,0 +1,50 @@
+# PIPELINE DEFINITION
+# Name: run-all-components
+# Description: Runs the entire pipeline.
+components:
+  comp-data-preprocessing-spec:
+    executorLabel: exec-data-preprocessing-spec
+  comp-data-scraping-spec:
+    executorLabel: exec-data-scraping-spec
+  comp-model-training-spec:
+    executorLabel: exec-model-training-spec
+deploymentSpec:
+  executors:
+    exec-data-preprocessing-spec:
+      container:
+        image: us-central1-docker.pkg.dev/ac215-399020/vertex-ai-pipeline/c2c-data-preprocessing:latest
+    exec-data-scraping-spec:
+      container:
+        image: us-central1-docker.pkg.dev/ac215-399020/vertex-ai-pipeline/c1-data-scraping:latest
+    exec-model-training-spec:
+      container:
+        image: us-central1-docker.pkg.dev/ac215-399020/vertex-ai-pipeline/c3-model-training:latest
+pipelineInfo:
+  description: Runs the entire pipeline.
+  name: run-all-components
+root:
+  dag:
+    tasks:
+      data-preprocessing-spec:
+        cachingOptions:
+          enableCache: true
+        componentRef:
+          name: comp-data-preprocessing-spec
+        taskInfo:
+          name: data-preprocessing-spec
+      data-scraping-spec:
+        cachingOptions:
+          enableCache: true
+        componentRef:
+          name: comp-data-scraping-spec
+        taskInfo:
+          name: data-scraping-spec
+      model-training-spec:
+        cachingOptions:
+          enableCache: true
+        componentRef:
+          name: comp-model-training-spec
+        taskInfo:
+          name: model-training-spec
+schemaVersion: 2.1.0
+sdkVersion: kfp-2.4.0

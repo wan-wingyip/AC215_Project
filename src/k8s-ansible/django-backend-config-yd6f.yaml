@@ -1,0 +1,6 @@
+kind: ConfigMap 
+apiVersion: v1 
+metadata:
+  name: django-backend-config-yd6f 
+data:  
+  WANDB_API_KEY: <WANDB_API_KEY>

@@ -1,0 +1,53 @@
+.main {
+  min-height: 100vh;
+  background-color: white;
+  display: inline;
+  max-width: 100%;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+/* Hero banner
+/* -------------------------------------------------------------------------- */
+
+.bannerContainer {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+}
+
+/* Overlay content */
+.searchOverlay {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  color: white; /* Text color */
+  text-align: center;
+  z-index: 5; /* Ensure it's above the background image */
+}
+
+/* no results */
+.noResults {
+  color: black; /* Text color */
+  text-align: center;
+}
+
+/* Positive results */
+.resultsContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* List of properties */
+.propertyGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px; /* This sets the gap between cards */
+  justify-content: space-around; 
+  align-items: flex-start; 
+}
+
+

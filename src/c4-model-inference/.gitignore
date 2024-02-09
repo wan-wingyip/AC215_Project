@@ -1,0 +1,5 @@
+.DS_STORE
+/artifacts
+/wandb
+/wandb/latest-run
+model-best.h5

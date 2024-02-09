@@ -1,0 +1,187 @@
+name: Continuous Integration and Continuous Deployment
+run-name: ${{ github.actor }} submitted a CICD Action ${{ github.event.head_commit.message }}
+on:
+  push:
+    branches: 
+        - milestone6
+        - main
+env:
+  # SECRETS
+    GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+    NEXT_PUBLIC_RAPID_API_KEY: ${{ secrets.NEXT_PUBLIC_RAPID_API_KEY }}
+    WANDB_API_KEY: ${{ secrets.WANDB_API_KEY }}
+  # ENV VARIABLES
+    GCP_PROJECT: ${{ vars.GCP_PROJECT }}
+    GCP_REGION: ${{ vars.GCP_REGION }}
+    GCP_SERVICE_ACCOUNT: ${{ vars.GCP_SERVICE_ACCOUNT }}
+    GCS_BUCKET: ${{ vars.GCS_BUCKET }}
+    GCS_BUCKET_URI: ${{ vars.GCS_BUCKET_URI }}
+    NEXT_PUBLIC_INFERENCE_URL: ${{ vars.NEXT_PUBLIC_INFERENCE_URL }}
+    NEXT_PUBLIC_REALTY_API_URL: ${{ vars.NEXT_PUBLIC_REALTY_API_URL }}
+    
+
+jobs:
+  Test:
+    if: contains(github.event.head_commit.message, '/run-')
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./scripts
+    steps:
+      # Checkout the repository code to the runner
+      - name: Check out repository code to the runner
+        uses: actions/checkout@v4
+
+      # Print a message to the runner log
+      - run: echo "Comment ${{ github.event.head_commit.message }}"
+      - run: echo "Job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "Job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "Branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+
+      # Auth to Google Cloud
+      - id: 'auth'
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}'
+
+      # Configure the Google Cloud SDK
+      - name: Configure Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+
+      # Configure the Docker Client
+      - name: Configure Docker Client
+        run: |-
+          gcloud auth configure-docker # --quiet #authenticate to gcr
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+
+      # List the files in the repository for debugging purposes
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+
+      # run-cicd-test
+      - name: Test Git Message command
+        if: contains(github.event.head_commit.message, '/run-cicd-test')
+        run: echo "cicd test passed!"
+
+      # run-cicd-test
+      - name: Run Image Scraper
+        if: contains(github.event.head_commit.message, '/run-image-scraper')
+        run: echo "placeholder for image scraping container"
+
+      # run-cicd-test
+      - name: Run Preprocessing Container
+        if: contains(github.event.head_commit.message, '/run-data-preprocessing')
+        run: echo "placeholder for data preprocessing container"
+
+
+      # run-cicd-test
+
+      - name: Run Model Training
+        if: contains(github.event.head_commit.message, '/run-model-training')
+        run: echo "placeholder for model training container"
+      # run-cicd-test
+
+      - name: Run Backend Server
+        if: contains(github.event.head_commit.message, '/run-backend-server')
+        run: echo "placeholder for back-end inferencing container"
+      # run-cicd-test
+
+      - name: Run Frontend Server
+        if: contains(github.event.head_commit.message, '/run-frontend-server')
+        run: echo "placeholder for front-end container"
+      
+      # run CICD test script
+      - name: Run CICD test script
+        if: contains(github.event.head_commit.message, '/run-test-script')
+        run: |
+          echo "Giving execute permissions to test script."
+          chmod +x ./cicd-test-script.sh
+          echo "Running test script."
+          ./cicd-test-script.sh
+      
+      
+      # run c2-build-tag-push
+      - name: Run c2-build-tag-push
+        if: contains(github.event.head_commit.message, '/run-c2-build-tag-push')
+        run: |
+          echo "Giving execute permissions to container builder script."
+          chmod +x ./c2-build-tag-push.sh
+          echo "Running c2 build script."
+          ./c2-build-tag-push.sh
+      
+      # run c1-build-tag-push
+      - name: Run c1-build-tag-push
+        if: contains(github.event.head_commit.message, '/run-c1-build-tag-push')
+        run: |
+          echo "Giving execute permissions to container builder script."
+          chmod +x ./c1-build-tag-push.sh
+          echo "Running c1 build script."
+          ./c1-build-tag-push.sh
+
+      # print finish message
+      - run: echo "Job's status is ${{ job.status }}."
+
+
+  Build:
+    if: contains(github.event.head_commit.message, '/build-')
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./scripts
+    steps:
+      # Checkout the repository code to the runner
+      - name: Check out repository code to the runner
+        uses: actions/checkout@v4
+
+      # Print a message to the runner log
+      - run: echo "Comment ${{ github.event.head_commit.message }}"
+      - run: echo "Job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "Job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "Branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+
+      # Auth to Google Cloud
+      - id: 'auth'
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}'
+
+      # Configure the Google Cloud SDK
+      - name: Configure Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+
+      # Configure the Docker Client
+      - name: Configure Docker Client
+        run: |-
+          gcloud auth configure-docker # --quiet #authenticate to gcr
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+
+      # List the files in the repository for debugging purposes
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+
+      # build c5-build-tag-push front end container
+      - name: build c5b-build-tag-push front end container
+        if: contains(github.event.head_commit.message, '/build-c5b')
+        run: |
+          echo "Giving execute permissions to container builder script."
+          chmod +x ./c5-build-tag-push-artifact-registry.sh
+          echo "Running c5 build and push script."
+          ./c5-build-tag-push-artifact-registry.sh
+          ./deploy-new-image-to-vm.sh
+
+  Deploy:
+    needs: [Test, Build]
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "testing build workflow"
+
+
+  Post-Deploy-Tests:
+    needs: [Test, Build, Deploy]
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "testing build workflow"

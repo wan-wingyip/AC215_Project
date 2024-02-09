@@ -1,0 +1,116 @@
+name: Deploy Full Stack App to GKE
+
+on:
+  push:
+    branches:
+      - 'main'
+  workflow_dispatch:
+env:
+  # SECRETS
+  GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+  NEXT_PUBLIC_RAPID_API_KEY: ${{ secrets.NEXT_PUBLIC_RAPID_API_KEY }}
+  WANDB_API_KEY: ${{ secrets.WANDB_API_KEY }}
+  # ENV VARIABLES
+  GCP_PROJECT: ${{ vars.GCP_PROJECT }}
+  GCP_REGION: ${{ vars.GCP_REGION }}
+  GCP_SERVICE_ACCOUNT: ${{ vars.GCP_SERVICE_ACCOUNT }}
+  GCS_BUCKET: ${{ vars.GCS_BUCKET }}
+  GCS_BUCKET_URI: ${{ vars.GCS_BUCKET_URI }}
+  NEXT_PUBLIC_REALTY_API_URL: ${{ vars.NEXT_PUBLIC_REALTY_API_URL }}
+
+
+
+jobs:
+  Test:
+    if: contains(github.event.head_commit.message, '/test')
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Testing"
+
+  Build_and_Push:
+    if: contains(github.event.head_commit.message, '/build')
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout code repository'
+        uses: actions/checkout@v2
+
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}'
+
+      - name: 'Set up Cloud SDK CLI'
+        uses: 'google-github-actions/setup-gcloud@v1'
+        with:
+          install_components: 'gke-gcloud-auth-plugin'
+
+      # Build and push C4 docker image to full-stack artifact registry.
+      - name: 'Build and push C4 docker image to artifact registry'
+        env:
+          GCP_PROJECT: ${{ vars.GCP_PROJECT }}
+          GCP_REGION: ${{ vars.GCP_REGION }}
+          ARTIFACT_REGISTRY_REPO_NAME: ${{ vars.ARTIFACT_REGISTRY_REPO_NAME }}
+          ARTIFACT_REGISTRY_PATH: ${{ vars.ARTIFACT_REGISTRY_PATH }}
+        run: |
+          gcloud auth configure-docker $ARTIFACT_REGISTRY_PATH --quiet
+          docker buildx build -t "$ARTIFACT_REGISTRY_PATH/$GCP_PROJECT/$ARTIFACT_REGISTRY_REPO_NAME/c4-model-inference:latest" ./src/c4-model-inference/
+          docker push "$ARTIFACT_REGISTRY_PATH/$GCP_PROJECT/$ARTIFACT_REGISTRY_REPO_NAME/c4-model-inference:latest"
+
+      # Build and push C5 docker image to full-stack artifact registry
+      - name: 'Build and push C5 docker image to artifact registry'
+        env:
+          GCP_PROJECT: ${{ vars.GCP_PROJECT }}
+          GCP_REGION: ${{ vars.GCP_REGION }}
+          ARTIFACT_REGISTRY_REPO_NAME: ${{ vars.ARTIFACT_REGISTRY_REPO_NAME }}
+          ARTIFACT_REGISTRY_PATH: ${{ vars.ARTIFACT_REGISTRY_PATH }}
+        run: |
+          gcloud auth configure-docker $ARTIFACT_REGISTRY_PATH --quiet
+          docker buildx build -t "$ARTIFACT_REGISTRY_PATH/$GCP_PROJECT/$ARTIFACT_REGISTRY_REPO_NAME/c5-front-end:latest" ./src/c5-test-frontend/rehab-ai/
+          docker push "$ARTIFACT_REGISTRY_PATH/$GCP_PROJECT/$ARTIFACT_REGISTRY_REPO_NAME/c5-front-end:latest"
+
+  Deploy:
+    if: contains(github.event.head_commit.message, '/deploy')
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout code repository'
+        uses: actions/checkout@v2
+
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}'
+
+      - name: 'Set up Cloud SDK CLI'
+        uses: 'google-github-actions/setup-gcloud@v1'
+        with:
+          install_components: 'gke-gcloud-auth-plugin'
+
+      - name: 'update to latest gcloud tool'
+        run: gcloud components update --quiet 
+
+
+      # Deploy to Google Kubernetes Cluster
+      - name: 'Deploy to GKE'
+        env:
+          GCP_PROJECT: ${{ vars.GCP_PROJECT }}
+          GCP_REGION: ${{ vars.GCP_REGION }}
+          GKE_CLUSTER_NAME: ${{ vars.GKE_CLUSTER_NAME }}
+          ARTIFACT_REGISTRY_REPO_NAME: ${{ vars.ARTIFACT_REGISTRY_REPO_NAME }}
+          GA_GKE_C4_DJANGO_CLUSTER_IP: ${{ vars.GA_GKE_C4_DJANGO_CLUSTER_IP }}
+          GA_NEXT_PUBLIC_RAPID_API_KEY: ${{ secrets.GA_NEXT_PUBLIC_RAPID_API_KEY }}
+          GA_NEXT_PUBLIC_REALTY_API_URL: ${{ vars.GA_NEXT_PUBLIC_REALTY_API_URL }}
+          GA_WANDB_API_KEY: ${{ secrets.GA_WANDB_API_KEY }}
+          ARTIFACT_REGISTRY_PATH: ${{ vars.ARTIFACT_REGISTRY_PATH }}
+        run: |
+          gcloud container clusters get-credentials $GKE_CLUSTER_NAME
+          sed -i "s/GCP_PROJECT/$GCP_PROJECT/g" ./scripts/full-stack-deployment.yaml
+          sed -i "s/ARTIFACT_REGISTRY_PATH/$ARTIFACT_REGISTRY_PATH/g" ./scripts/full-stack-deployment.yaml
+          sed -i "s/ARTIFACT_REGISTRY_REPO_NAME/$ARTIFACT_REGISTRY_REPO_NAME/g" ./scripts/full-stack-deployment.yaml
+          sed -i "s/GA_GKE_C4_DJANGO_CLUSTER_IP/$GA_GKE_C4_DJANGO_CLUSTER_IP/g" ./scripts/full-stack-deployment.yaml
+          sed -i "s/GA_NEXT_PUBLIC_RAPID_API_KEY/$GA_NEXT_PUBLIC_RAPID_API_KEY/g" ./scripts/full-stack-deployment.yaml
+          sed -i "s/GA_NEXT_PUBLIC_REALTY_API_URL/$GA_NEXT_PUBLIC_REALTY_API_URL/g" ./scripts/full-stack-deployment.yaml
+          sed -i "s/GA_WANDB_API_KEY/$GA_WANDB_API_KEY/g" ./scripts/full-stack-deployment.yaml
+          kubectl apply -f ./scripts/full-stack-deployment.yaml
+
+
+

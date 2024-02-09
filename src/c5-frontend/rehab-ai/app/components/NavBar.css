@@ -1,0 +1,48 @@
+/* Navbar.css */
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    color: black;
+    padding-right: 150px;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    z-index: 20;
+    width: 100%;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.navbar-logo {
+    font-size: 1.5em;
+    font-weight: thin;
+    font: 'open sans', 'sans-serif', 'gotham';
+    color: black;
+}
+
+.navbar-links a {
+    color: #2a2a33;
+    text-decoration: none;
+    margin-right: 40px;
+    font-size: 16px;
+    font: open sans, gotham, sans-serif;
+}
+
+.navbar-links a:hover {
+    color: grey;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+    .navbar-links {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .navbar-links a {
+        margin-bottom: 10px;
+    }
+}
