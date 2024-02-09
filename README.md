@@ -82,11 +82,11 @@ To address the gap as defined in the problem definition, we have developed an in
 
 ### Technical Architecture
 
-![Rehab AI](/previous_readmes/Technical_Architecture.png)
+![Rehab AI](/previous_readmes/Technical_Architecture.PNG)
 
 ### Deployment
 
-![Rehab AI](/previous_readmes/deployment.jpg)
+![Rehab AI](/previous_readmes/deployment.JPG)
 
 ### Code Structure
 The following are the containers we've built:
