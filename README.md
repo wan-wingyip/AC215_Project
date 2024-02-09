@@ -78,17 +78,21 @@ In the production setting our images are feteched directly from the zillow api f
 
 To address the gap as defined in the problem definition, we have developed an innovative platform. This user-friendly platform allows users to enter a specific zip code, which then provides them with a curated list properties in the area, with with labels that mention whether the house is a fixer-upper home or not. Our approach utilizes a Convolutional Neural Network (CNN) model. This model intelligently analyzes and interprets images from house listings, enabling it to accurately identify properties that are fixer-uppers. This tool not only simplifies the search process for buyers but also offers a unique solution in the realm of real estate property categorization.
 
+![Rehab AI](/previous_readmes/image.png)
 
+### Technical Architecture
 
-![Rehab AI](/previous%20readmes/image.png)
+![Rehab AI](/previous_readmes/Technical_Architecture.png)
 
+### Deployment
 
+![Rehab AI](/previous_readmes/deployment.jpg)
 
-
-#### Code Structure
+### Code Structure
 The following are the containers we've built:
 
 ### Container1 - Training Data Scraper
+
 **Role**: Scrapes images of renovated and un-renovated homes from Craigslist for model training.
 - **Source**: Craigslist, we use keywords to identify fixer uppers and renovated houses.
 - **Output**: Saves images to Google Cloud Bucket in the `fixer-upper/` and `renovated/` folders.
