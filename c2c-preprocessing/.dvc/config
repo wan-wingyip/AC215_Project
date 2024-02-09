@@ -1,5 +1,0 @@
-[core]
-    no_scm = True
-    remote = output_images
-['remote "output_images"']
-    url = gs://ac215-rehab-preprocess/dvc_store

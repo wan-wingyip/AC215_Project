@@ -1,6 +1,0 @@
-# misc
-.DS_Store
-/docker-volumes
-/input_images
-/output_images
-/secrets
